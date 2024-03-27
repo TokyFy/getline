@@ -6,15 +6,13 @@
 /*   By: franaivo <franaivo@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 16:09:03 by franaivo          #+#    #+#             */
-/*   Updated: 2024/03/22 12:19:12 by franaivo         ###   ########.fr       */
+/*   Updated: 2024/03/27 08:16:21 by franaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <fcntl.h>
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
 
 int	feed_block(char **block, char *buffer, int fd)
@@ -99,25 +97,3 @@ char	*get_next_line(int fd)
 	free(buffer);
 	return (extract_line(&block));
 }
-/*
-int	main(void)
-{
-	int	fd;
-
-	fd = 0;
-	fd = open("big_line_with_nl", O_RDONLY);
-  printf("%s" , get_next_line(fd));
-  printf("%s" , get_next_line(fd));
-  printf("%s" , get_next_line(fd));
-  printf("%s" , get_next_line(fd));
-  printf("%s" , get_next_line(fd));
-  printf("%s" , get_next_line(fd));
-  printf("%s" , get_next_line(fd));
-  printf("%s" , get_next_line(fd));
-  printf("%s" , get_next_line(fd));
-  printf("%s" , get_next_line(fd));
-  printf("%s" , get_next_line(fd));
-  printf("%s" , get_next_line(fd));
-  return (0);
-}
-*/
