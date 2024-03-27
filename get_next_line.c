@@ -6,14 +6,11 @@
 /*   By: franaivo <franaivo@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 16:09:03 by franaivo          #+#    #+#             */
-/*   Updated: 2024/03/27 08:16:21 by franaivo         ###   ########.fr       */
+/*   Updated: 2024/03/27 08:27:17 by franaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <fcntl.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 int	feed_block(char **block, char *buffer, int fd)
 {

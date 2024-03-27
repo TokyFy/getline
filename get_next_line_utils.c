@@ -6,12 +6,11 @@
 /*   By: franaivo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 15:46:11 by franaivo          #+#    #+#             */
-/*   Updated: 2024/03/18 15:43:11 by franaivo         ###   ########.fr       */
+/*   Updated: 2024/03/27 08:26:05 by franaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <string.h>
 
 t_size_t	ft_strlen(const char *s)
 {
