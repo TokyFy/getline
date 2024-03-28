@@ -6,11 +6,15 @@
 /*   By: franaivo <franaivo@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 16:09:03 by franaivo          #+#    #+#             */
-/*   Updated: 2024/03/27 08:27:17 by franaivo         ###   ########.fr       */
+/*   Updated: 2024/03/28 12:06:18 by franaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
 int	feed_block(char **block, char *buffer, int fd)
 {
@@ -22,13 +26,11 @@ int	feed_block(char **block, char *buffer, int fd)
 	r = read(fd, buffer, BUFFER_SIZE);
 	if (r < 0 || (r == 0 && !block))
 	{
-		free(buffer);
-		free(block);
-		return (r);
+			return (r);
 	}
 	buffer[r] = '\0';
 	if (!*block)
-		*block = ft_strjoin(buffer, "");
+		*block = strdup(buffer);
 	else
 	{
 		new_block = ft_strjoin(*block, buffer);
@@ -47,7 +49,11 @@ char	*extract_line(char **block)
 	new_block = NULL;
 	buffer = NULL;
 	if (!*block || !**block)
+  {
+    free(*block);
+    *block = NULL;
 		return (0);
+  }
 	newline_pos = ft_strchr(*block, '\n');
 	if (!newline_pos)
 		newline_pos = ft_strchr(*block, '\0');
@@ -76,21 +82,39 @@ char	*get_next_line(int fd)
 	buffer = NULL;
 	r = -1;
 	if (BUFFER_SIZE < 1 || fd < 0 || read(fd, 0, 0) < 0)
+  {
+    free(block);
+    block = NULL;
 		return (NULL);
+  }
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 	{
 		free(block);
+    block = NULL;
 		return (0);
 	}
 	while ((!ft_strchr(block, '\n')) && r != 0)
 	{
 		r = feed_block(&block, buffer, fd);
 		if (r < 0)
-			return (NULL);
+    {
+      free(buffer);
+      free(block);
+      buffer = NULL;
+      block = NULL;
+      return (NULL);
+    }
 	}
-	if (!block)
-		return (0);
+	if (!block || (r == 0 && *block == '\0'))
+  {
+    free(block);
+    free(buffer);
+    buffer = NULL;
+    block = NULL;
+    return (NULL);
+  }
 	free(buffer);
 	return (extract_line(&block));
 }
+
