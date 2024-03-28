@@ -6,15 +6,23 @@
 /*   By: franaivo <franaivo@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 16:09:03 by franaivo          #+#    #+#             */
-/*   Updated: 2024/03/28 12:06:18 by franaivo         ###   ########.fr       */
+/*   Updated: 2024/03/28 14:14:16 by franaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "get_next_line.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+char	*catch(char **ptr1, char **ptr2, char *rtrn)
+{
+	free(*ptr1);
+	free(*ptr2);
+	*ptr1 = NULL;
+	*ptr2 = NULL;
+	return (rtrn);
+}
 
 int	feed_block(char **block, char *buffer, int fd)
 {
@@ -26,11 +34,13 @@ int	feed_block(char **block, char *buffer, int fd)
 	r = read(fd, buffer, BUFFER_SIZE);
 	if (r < 0 || (r == 0 && !block))
 	{
-			return (r);
+		return (r);
 	}
 	buffer[r] = '\0';
 	if (!*block)
-		*block = strdup(buffer);
+	{
+		*block = ft_strjoin("", buffer);
+	}
 	else
 	{
 		new_block = ft_strjoin(*block, buffer);
@@ -49,11 +59,7 @@ char	*extract_line(char **block)
 	new_block = NULL;
 	buffer = NULL;
 	if (!*block || !**block)
-  {
-    free(*block);
-    *block = NULL;
-		return (0);
-  }
+		return (catch (block, NULL, NULL));
 	newline_pos = ft_strchr(*block, '\n');
 	if (!newline_pos)
 		newline_pos = ft_strchr(*block, '\0');
@@ -64,10 +70,7 @@ char	*extract_line(char **block)
 		return (0);
 	buffer = ft_substr(*block, 0, newline_pos - *block);
 	if (!buffer)
-	{
-		free(new_block);
-		return (0);
-	}
+		return (catch (&new_block, NULL, NULL));
 	free(*block);
 	*block = new_block;
 	return (buffer);
@@ -82,39 +85,22 @@ char	*get_next_line(int fd)
 	buffer = NULL;
 	r = -1;
 	if (BUFFER_SIZE < 1 || fd < 0 || read(fd, 0, 0) < 0)
-  {
-    free(block);
-    block = NULL;
-		return (NULL);
-  }
-	buffer = malloc(BUFFER_SIZE + 1);
-	if (!buffer)
 	{
 		free(block);
-    block = NULL;
-		return (0);
+		block = NULL;
+		return (NULL);
 	}
+	buffer = malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return (catch (&block, NULL, NULL));
 	while ((!ft_strchr(block, '\n')) && r != 0)
 	{
 		r = feed_block(&block, buffer, fd);
 		if (r < 0)
-    {
-      free(buffer);
-      free(block);
-      buffer = NULL;
-      block = NULL;
-      return (NULL);
-    }
+			return (catch (&buffer, &block, 0));
 	}
 	if (!block || (r == 0 && *block == '\0'))
-  {
-    free(block);
-    free(buffer);
-    buffer = NULL;
-    block = NULL;
-    return (NULL);
-  }
+		return (catch (&buffer, &block, 0));
 	free(buffer);
 	return (extract_line(&block));
 }
-

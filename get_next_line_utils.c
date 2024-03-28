@@ -6,10 +6,9 @@
 /*   By: franaivo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 15:46:11 by franaivo          #+#    #+#             */
-/*   Updated: 2024/03/27 14:47:26 by franaivo         ###   ########.fr       */
+/*   Updated: 2024/03/28 14:07:07 by franaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "get_next_line.h"
 
 t_size_t	ft_strlen(const char *s)
@@ -18,7 +17,9 @@ t_size_t	ft_strlen(const char *s)
 
 	i = 0;
 	while (s[i])
+	{
 		i++;
+	}
 	return (i);
 }
 
