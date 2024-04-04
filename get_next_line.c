@@ -6,7 +6,7 @@
 /*   By: franaivo <franaivo@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 16:09:03 by franaivo          #+#    #+#             */
-/*   Updated: 2024/04/04 08:57:44 by franaivo         ###   ########.fr       */
+/*   Updated: 2024/04/04 11:57:13 by franaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -76,13 +76,13 @@ char	*extract_line(char **block)
 
 char	*get_next_line(int fd)
 {
-	static char	*block = NULL;
+	static char	*block;
 	char		*buffer;
 	int			r;
 
 	buffer = NULL;
 	r = -1;
-	if (BUFFER_SIZE < 1 || fd < 0 || read(fd, 0, 0) < 0)
+	if (BUFFER_SIZE < 1 || fd < 0)
 	{
 		free(block);
 		block = NULL;
@@ -102,3 +102,4 @@ char	*get_next_line(int fd)
 	free(buffer);
 	return (extract_line(&block));
 }
+
