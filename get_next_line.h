@@ -6,7 +6,7 @@
 /*   By: username <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 16:08:18 by username          #+#    #+#             */
-/*   Updated: 2024/03/27 16:28:01 by franaivo         ###   ########.fr       */
+/*   Updated: 2024/04/04 08:57:44 by franaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # endif // !BUFFER_SIZE
 
 # include <stdlib.h>
-# include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
 

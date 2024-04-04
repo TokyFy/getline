@@ -6,13 +6,11 @@
 /*   By: franaivo <franaivo@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 16:09:03 by franaivo          #+#    #+#             */
-/*   Updated: 2024/03/28 14:53:52 by franaivo         ###   ########.fr       */
+/*   Updated: 2024/04/04 08:57:44 by franaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
 
 char	*catch(char **ptr1, char **ptr2, char *rtrn)
